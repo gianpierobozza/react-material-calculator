@@ -12,9 +12,10 @@ const ReactMuiCalculator = ({ minWidth, maxWidth }) => {
       sx={{ 
         backgroundColor: "lightgray",
         borderRadius: 4,
-        p: 4,
+        boxShadow: 3,
         minWidth: minCalcWidth,
-        maxWidth: maxCalcWidth
+        maxWidth: maxCalcWidth,
+        p: 4,
       }}
     >
       <CalcDisplay />

@@ -4,12 +4,13 @@ import { Box, Button, Grid } from "@mui/material";
 
 const Item = styled(Button)(({ theme }) => ({
   ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: "center",
+  backgroundColor: theme.palette.success.main,
+  color: theme.palette.primary.contrastText,
   fontWeight: "bold",
   fontSize: "2rem",
-  width: "100%",
-  backgroundColor: theme.palette.secondary.light
+  padding: theme.spacing(1),
+  textAlign: "center",
+  width: "100%"
 }));
 
 const CalcButton = ({ button }) => {
