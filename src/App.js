@@ -1,5 +1,5 @@
 import * as React from "react";
-import ReactMuiCalculator from "./components/ReactMuiCalculator";
+import ReactMuiCalculator from "./lib/components/ReactMuiCalculator";
 
 import { Box } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
