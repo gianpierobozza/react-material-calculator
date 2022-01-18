@@ -1,6 +1,6 @@
 import * as React from "react";
 import { styled } from "@mui/material/styles";
-import { Grid, Button } from "@mui/material";
+import { Box, Button, Grid } from "@mui/material";
 
 const Item = styled(Button)(({ theme }) => ({
   ...theme.typography.body2,
@@ -9,21 +9,21 @@ const Item = styled(Button)(({ theme }) => ({
   fontWeight: "bold",
   fontSize: "2rem",
   width: "100%",
-  border: "1px solid",
-  borderColor: theme.palette.primary.light,
-  boxShadow: 2
+  backgroundColor: theme.palette.secondary.light
 }));
 
 const CalcButton = ({ button }) => {
   return (
     <Grid item xs={button.dimension}>
-      <Item
-        sx={button.style ? button.style : {}}
-      >
-        <span dangerouslySetInnerHTML={{
-          __html: button.value
-        }} />
-      </Item>
+      <Box sx={{ boxShadow: 3 }}>
+        <Item
+          sx={button.style ? button.style : {}}
+        >
+          <span dangerouslySetInnerHTML={{
+            __html: button.value
+          }} />
+        </Item>
+      </Box>
     </Grid>
   )
 }
