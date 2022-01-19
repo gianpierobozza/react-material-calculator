@@ -1,9 +1,9 @@
-import * as React from "react";
-import { useTheme } from "@mui/material/styles";
-import { Box, Grid } from "@mui/material";
-import CalcButton from "./CalcButton";
+import * as React from "react"
+import { useTheme } from "@mui/material/styles"
+import { Box, Grid } from "@mui/material"
+import CalcButton from "./CalcButton"
 
-const CalcKeypad = () => {
+const CalcKeypad = ({ operation, setOperation, history, setHistory }) => {
 	const theme = useTheme();
 	const buttons = [
 		{ value: "7", dimension: 2 },
@@ -42,7 +42,14 @@ const CalcKeypad = () => {
 			<Grid container spacing={3}>
 				{buttons.map((button, index) => {
 					return (
-						<CalcButton button={button} key={index} />
+						<CalcButton 
+							button={button}
+							operation={operation}
+							setOperation={setOperation}
+							history={history}
+        			setHistory={setHistory}
+							key={index}
+						/>
 					)
 				})}
 			</Grid>
