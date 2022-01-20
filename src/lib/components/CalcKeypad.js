@@ -9,21 +9,21 @@ const CalcKeypad = ({ operation, setOperation, history, setHistory }) => {
 		{ value: "7", dimension: 2 },
 		{ value: "8", dimension: 2 },
 		{ value: "9", dimension: 2 },
-		{ value: "&divide;", dimension: 2 },
-		{ value: "&#9100;", dimension: 2 },
+		{ value: "/", dimension: 2 },
+		{ value: "⎌", dimension: 2 },
 		{ value: "C", dimension: 2 },
 		{ value: "4", dimension: 2 },
 		{ value: "5", dimension: 2 },
 		{ value: "6", dimension: 2 },
-		{ value: "&#215;", dimension: 2 },
+		{ value: "*", dimension: 2 },
 		{ value: "(", dimension: 2 },
 		{ value: ")", dimension: 2 },
 		{ value: "1", dimension: 2 },
 		{ value: "2", dimension: 2 },
 		{ value: "3", dimension: 2 },
 		{ value: "-", dimension: 2 },
-		{ value: "x&#178;", dimension: 2 },
-		{ value: "&#8730;", dimension: 2 },
+		{ value: "x²", dimension: 2 },
+		{ value: "√", dimension: 2 },
 		{ value: "0", dimension: 2 },
 		{ value: ".", dimension: 2 },
 		{ value: "%", dimension: 2 },
@@ -47,7 +47,7 @@ const CalcKeypad = ({ operation, setOperation, history, setHistory }) => {
 							operation={operation}
 							setOperation={setOperation}
 							history={history}
-        			setHistory={setHistory}
+        					setHistory={setHistory}
 							key={index}
 						/>
 					)
