@@ -1,5 +1,4 @@
 import * as React from "react"
-import includes from "lodash/includes"
 import reverse from "lodash/reverse"
 import { create, all } from 'mathjs'
 import { styled } from "@mui/material/styles"
@@ -19,39 +18,67 @@ const Item = styled(Button)(({ theme, operation, setOperation }) => ({
   width: "100%"
 }));
 
-const operators = ["+", "-", "÷", "*", "pow", "sqrt", "%"]
-
 function isNumeric(str) {
   if (typeof str != "string") return false
   return !isNaN(str) && !isNaN(parseFloat(str))
 }
 
 const CalcButton = ({ button, operation, setOperation, history, setHistory }) => {
-  
+
   const handleButtonClick = (value) => {
-    if (value === "⎌") {
-      if (operation.length > 1) {
-        setOperation(operation.substring(0, operation.length - 1))
-      } else {
+    switch (value) {
+      case "⎌":
+        if (operation.length > 1) {
+          setOperation(operation.substring(0, operation.length - 1))
+        } else {
+          setOperation("0")
+        }
+        break
+      case "=":
+        const result = math.evaluate(operation).toString()
+        setHistory(history => reverse([...history, operation + " = " + result]));
+        setOperation(result)
+        break
+      case "C":
         setOperation("0")
+        break
+      case "+":
+      case "-":
+      case "/":
+      case "*":
+        if (isNumeric(operation.slice(-1)) || operation.slice(-1) === ")") {
+          setOperation(operation + value)
+        }
+        break
+      case "(":
+        if (!isNumeric(operation.slice(-1))) {
+          setOperation(operation + value)
+        } else if (operation === "0") {
+          setOperation(value)
+        }
+        break
+      case ")":
+        if (isNumeric(operation.slice(-1))) {
+          setOperation(operation + value)
+        } else if (operation === "0") {
+          setOperation(value)
+        }
+        break
+      case ".": {
+        const reversedOperation = operation.split("").reverse().join("")
+        const firstBinaryOperatorIndex = reversedOperation.search(`[/+/-/*//]`);
+        const lastToken = reversedOperation.substring(0, firstBinaryOperatorIndex)
+        if (isNumeric(lastToken) && lastToken.indexOf(".") === -1) {
+          setOperation(operation + value)
+        }
+        break
       }
-    } else if (value === "=") {
-      const result = math.evaluate(operation).toString()
-      setHistory(history => reverse([...history, operation + " = " + result]));
-      setOperation(result)
-    } else if (value === "C") {
-      setOperation("0")
-    } else {
-      if (
-        (includes(operators, operation.slice(-1)) && isNumeric(value)) ||
-        (isNumeric(operation))
-      ) {
+      default:
         if (operation !== "0") {
           setOperation(operation + value)
         } else {
           setOperation(value)
         }
-      }
     }
   }
 
