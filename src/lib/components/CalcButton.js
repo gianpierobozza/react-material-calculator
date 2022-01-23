@@ -1,12 +1,11 @@
 import * as React from "react"
 import { create, all } from 'mathjs'
 import { styled } from "@mui/material/styles"
-import { Box, Button, Grid } from "@mui/material"
+import { Box, Button, Grid, Tooltip } from "@mui/material"
 
-const config = {}
-const math = create(all, config)
+const math = create(all, {})
 
-const Item = styled(Button)(({ theme, operation, setOperation }) => ({
+const Item = styled(Button)(({ theme }) => ({
   ...theme.typography.body2,
   backgroundColor: theme.palette.success.main,
   color: theme.palette.primary.contrastText,
@@ -14,6 +13,7 @@ const Item = styled(Button)(({ theme, operation, setOperation }) => ({
   fontSize: "2rem",
   padding: theme.spacing(1),
   textAlign: "center",
+  textTransform: "none",
   width: "100%"
 }));
 
@@ -22,7 +22,7 @@ function isNumeric(str) {
   return !isNaN(str) && !isNaN(parseFloat(str))
 }
 
-const CalcButton = ({ button, operation, setOperation, setHistory }) => {
+const CalcButton = ({ button, operation, setOperation, setHistory, captureKeyboard }) => {
 
   const handleButtonClick = (value) => {
     switch (value) {
@@ -107,18 +107,27 @@ const CalcButton = ({ button, operation, setOperation, setHistory }) => {
     }
   }
 
+  const innerBox = (
+    <Box sx={{ boxShadow: 3 }}>
+      <Item
+        sx={button.style ? button.style : {}}
+        id={`keypad-${button.keypad}`}
+        onClick={() => handleButtonClick(button.value)}
+      >
+        <span dangerouslySetInnerHTML={{
+          __html: button.value
+        }} />
+      </Item>
+    </Box>
+  )
+
   return (
     <Grid item xs={button.dimension}>
-      <Box sx={{ boxShadow: 3 }}>
-        <Item
-          sx={button.style ? button.style : {}}
-          onClick={() => handleButtonClick(button.value)}
-        >
-          <span dangerouslySetInnerHTML={{
-            __html: button.value
-          }} />
-        </Item>
-      </Box>
+      {captureKeyboard ?
+        (<Tooltip followCursor title={`[ ${button.keypad} ]`}>
+          {innerBox}
+        </Tooltip>) :
+        innerBox}
     </Grid>
   )
 }
