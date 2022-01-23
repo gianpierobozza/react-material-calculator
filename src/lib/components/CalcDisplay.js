@@ -3,7 +3,7 @@ import { useTheme } from "@mui/material/styles"
 import { Box, Grid, Stack } from "@mui/material"
 import "./display.css"
 
-const CalcDisplay = ({ operation, setOperation, history, setHistory }) => {
+const CalcDisplay = ({ operation, history }) => {
   const theme = useTheme()
 
   return (
@@ -48,19 +48,6 @@ const CalcDisplay = ({ operation, setOperation, history, setHistory }) => {
                 <Box key={index} component="div" sx={{ width: "100%", textAlign: "end", fontSize: "1rem" }}>{line}</Box>
               )
             })}
-            {/* <Box component="div" sx={{ width: "100%", textAlign: "end", fontSize: "1.5rem" }}>1</Box>
-            <Box component="div" sx={{ width: "100%", textAlign: "end", fontSize: "1rem" }}>2</Box>
-            <Box component="div" sx={{ width: "100%", textAlign: "end", fontSize: "1rem" }}>3</Box>
-            <Box component="div" sx={{ width: "100%", textAlign: "end", fontSize: "1rem" }}>4</Box>
-            <Box component="div" sx={{ width: "100%", textAlign: "end", fontSize: "1rem" }}>5</Box>
-            <Box component="div" sx={{ width: "100%", textAlign: "end", fontSize: "1rem" }}>6</Box>
-            <Box component="div" sx={{ width: "100%", textAlign: "end", fontSize: "1rem" }}>7</Box>
-            <Box component="div" sx={{ width: "100%", textAlign: "end", fontSize: "1rem" }}>8</Box>
-            <Box component="div" sx={{ width: "100%", textAlign: "end", fontSize: "1rem" }}>9</Box>
-            <Box component="div" sx={{ width: "100%", textAlign: "end", fontSize: "1rem" }}>10</Box>
-            <Box component="div" sx={{ width: "100%", textAlign: "end", fontSize: "1rem" }}>11</Box>
-            <Box component="div" sx={{ width: "100%", textAlign: "end", fontSize: "1rem" }}>12</Box>
-            <Box component="div" sx={{ width: "100%", textAlign: "end", fontSize: "1rem" }}>13</Box> */}
           </Stack>
         </Grid>
       </Box>

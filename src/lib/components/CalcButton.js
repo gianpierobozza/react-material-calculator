@@ -1,5 +1,4 @@
 import * as React from "react"
-import reverse from "lodash/reverse"
 import { create, all } from 'mathjs'
 import { styled } from "@mui/material/styles"
 import { Box, Button, Grid } from "@mui/material"
@@ -23,21 +22,26 @@ function isNumeric(str) {
   return !isNaN(str) && !isNaN(parseFloat(str))
 }
 
-const CalcButton = ({ button, operation, setOperation, history, setHistory }) => {
+const CalcButton = ({ button, operation, setOperation, setHistory }) => {
 
   const handleButtonClick = (value) => {
     switch (value) {
+      case "=":
+        try {
+          const result = math.evaluate(operation).toString()
+          setHistory(history => [operation + " = " + result, ...history]);
+          setOperation(result)
+        } catch (error) {
+          setHistory(history => ["invalid operation", ...history]);
+          setOperation("0")
+        }
+        break
       case "⎌":
         if (operation.length > 1) {
           setOperation(operation.substring(0, operation.length - 1))
         } else {
           setOperation("0")
         }
-        break
-      case "=":
-        const result = math.evaluate(operation).toString()
-        setHistory(history => reverse([...history, operation + " = " + result]));
-        setOperation(result)
         break
       case "C":
         setOperation("0")
@@ -46,19 +50,40 @@ const CalcButton = ({ button, operation, setOperation, history, setHistory }) =>
       case "-":
       case "/":
       case "*":
+      case "x²":
+      case "%":
         if (isNumeric(operation.slice(-1)) || operation.slice(-1) === ")") {
-          setOperation(operation + value)
+          var newValue = ""
+          if (value === "x²") {
+            newValue = "^2"
+          } else {
+            newValue = value
+          }
+          if (operation !== "0") {
+            setOperation(operation + newValue)
+          } else if (newValue === "+" || newValue === "-") {
+            setOperation(newValue)
+          }
+        }
+        break
+      case "√":
+        if (!isNumeric(operation.slice(-1))) {
+          if (operation !== "0") {
+            setOperation(operation + "sqrt(")
+          } else {
+            setOperation("sqrt(")
+          }
         }
         break
       case "(":
-        if (!isNumeric(operation.slice(-1))) {
+        if (!isNumeric(operation.slice(-1)) && operation.slice(-1) !== "%") {
           setOperation(operation + value)
         } else if (operation === "0") {
           setOperation(value)
         }
         break
       case ")":
-        if (isNumeric(operation.slice(-1))) {
+        if (isNumeric(operation.slice(-1)) || operation.slice(-1) === "%") {
           setOperation(operation + value)
         } else if (operation === "0") {
           setOperation(value)
