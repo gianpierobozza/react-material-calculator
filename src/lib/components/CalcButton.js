@@ -52,7 +52,7 @@ const CalcButton = ({ button, operation, setOperation, setHistory, captureKeyboa
       case "*":
       case "x²":
       case "%":
-        if (isNumeric(operation.slice(-1)) || operation.slice(-1) === ")") {
+        if (isNumeric(operation.slice(-1)) || operation.slice(-1) === ")" || operation.slice(-1) === "%") {
           var newValue = ""
           if (value === "x²") {
             newValue = "^2"
@@ -83,17 +83,15 @@ const CalcButton = ({ button, operation, setOperation, setHistory, captureKeyboa
         }
         break
       case ")":
-        if (isNumeric(operation.slice(-1)) || operation.slice(-1) === "%") {
+        if ((isNumeric(operation.slice(-1)) && operation !== "0") || operation.slice(-1) === "%") {
           setOperation(operation + value)
-        } else if (operation === "0") {
-          setOperation(value)
         }
         break
       case ".": {
         const reversedOperation = operation.split("").reverse().join("")
         const firstBinaryOperatorIndex = reversedOperation.search(`[/+/-/*//]`);
         const lastToken = reversedOperation.substring(0, firstBinaryOperatorIndex)
-        if (isNumeric(lastToken) && lastToken.indexOf(".") === -1) {
+        if ((isNumeric(lastToken) && lastToken.indexOf(".") === -1) || firstBinaryOperatorIndex === -1) {
           setOperation(operation + value)
         }
         break
