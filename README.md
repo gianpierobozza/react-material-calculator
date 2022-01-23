@@ -16,7 +16,7 @@ Install via npm with the command
 Then import it and use it in your React application with
 
 ```
-import ReactMuiCalculator from "ReactMuiCalculator"
+import { ReactMuiCalculator } from "react-material-calculator";
 ...
 <ReactMuiCalculator minWidth={<number>} maxWidth={<number>} />
 ```
