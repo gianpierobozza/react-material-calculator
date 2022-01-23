@@ -1,6 +1,6 @@
 {
   "name": "react-material-calculator",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "private": false,
   "description": "Two test React components",
   "author": "Jawblia",
@@ -8,6 +8,7 @@
   "main": "dist/index.js",
   "module": "dist/index.js",
   "files": [ "dist", "README.md" ],
+  "license" : "MIT",
   "repository": {
       "type": "git",
       "url": "git+https://github.com/gianpierobozza/react-material-calculator"
