@@ -1,9 +1,9 @@
 {
   "name": "react-material-calculator",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "private": false,
-  "description": "Two test React components",
-  "author": "Jawblia",
+  "description": "A React Material Calculator Component",
+  "author": "Gianpiero Bozza",
   "keywords": ["react", "components", "calculator", "material-ui", "mui"],
   "main": "dist/index.js",
   "module": "dist/index.js",
